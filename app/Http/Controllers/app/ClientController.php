@@ -35,8 +35,9 @@ class ClientController extends Controller
         $method = 'POST';
         $action = route('clients.store');
         $item = new Client();
+        $editMode = false;
 
-        return view('app.client.create', compact('method','action','item'));
+        return view('app.client.create', compact('method','action','item','editMode'));
     }
 
     /**
@@ -48,10 +49,11 @@ class ClientController extends Controller
     public function store(Request $request)
     {     
         $this->validate($request, [
-            'name' => 'required|unique:client|max:255'
+            'name' => 'required|unique:client|max:255',
+            'email' => 'required|email|unique:client'
         ]);
 
-        Client::create( request(['name']) );
+        Client::create( request(['name','email','rg','cpf', 'address']) );
 
         return redirect('clients');
     }
@@ -78,8 +80,9 @@ class ClientController extends Controller
         $method = 'POST';
         $action = route('clients.update', $id );
         $item = Client::find($id);
+        $editMode = true;
         
-        return view('app.client.create', compact('method','action','item'));
+        return view('app.client.create', compact('method','action','item','editMode'));
     }
 
     /**
@@ -96,7 +99,7 @@ class ClientController extends Controller
             'name' => 'required|unique:client|max:255'
         ]);
 
-        Client::find($id)->update( request(['name']) );
+        Client::find($id)->update( request(['name','email','rg','cpf', 'address']) );
         
         return redirect('clients');
     }

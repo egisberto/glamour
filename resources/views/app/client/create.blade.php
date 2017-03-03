@@ -14,9 +14,9 @@
 			<form method="{{ $method }}" action="{{ $action }}">
 				{{ csrf_field() }}
 
-				@if (count($item) > 0)
-					<input name="_method" type="hidden" value="PUT">
-				@endif
+				@if ($editMode)
+                       <input name="_method" type="hidden" value="PUT">
+               	@endif
 				
 				<div class="form-group">
 					<label for="name">Nome</label>
@@ -25,22 +25,22 @@
 
 				<div class="form-group">
 					<label for="email">E-mail</label>
-					<input type="email" class="form-control" name="email" placeholder="E-mail" value="{{ $item->name }}" >
+					<input type="email" class="form-control" name="email" placeholder="E-mail" value="{{ $item->email }}" >
 				</div>
 
 				<div class="form-group">
 					<label for="rg">RG</label>
-					<input type="text" class="form-control"  name="rg" placeholder="RG" value="{{ $item->name }}" >
+					<input type="text" class="form-control"  name="rg" placeholder="RG" value="{{ $item->rg }}" >
 				</div>
 
 				<div class="form-group">
 					<label for="cpf">CPF</label>
-					<input type="text" class="form-control" name="cpf" placeholder="CPF" value="{{ $item->name }}" >
+					<input type="text" class="form-control" name="cpf" placeholder="CPF" value="{{ $item->cpf }}" >
 				</div>
 
 				<div class="form-group">
 					<label for="address">Endereço</label>
-					<input type="text" class="form-control" name="address" placeholder="Endereço Completo" value="{{ $item->name }}" >
+					<input type="text" class="form-control" name="address" placeholder="Endereço Completo" value="{{ $item->address }}" >
 				</div>
 
 				<button type="submit" class="btn btn-default">Submit</button>

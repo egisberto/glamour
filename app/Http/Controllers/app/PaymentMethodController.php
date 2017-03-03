@@ -33,10 +33,11 @@ class PaymentMethodController extends Controller
     public function create()
     {
         $method = 'POST';
-        $action = route('clients.store');
+        $action = route('payment_methods.store');
         $item = new PaymentMethod();
+        $editMode = false;
 
-        return view('app.payment_method.create', compact('method','action','item'));
+        return view('app.payment_method.create', compact('method','action','item','editMode'));
     }
 
     /**
@@ -53,7 +54,7 @@ class PaymentMethodController extends Controller
 
         PaymentMethod::create( request(['name']) );
 
-        return redirect('clients');
+        return redirect('payment_methods');
     }
 
     /**
@@ -76,10 +77,11 @@ class PaymentMethodController extends Controller
     public function edit($id)
     {
         $method = 'POST';
-        $action = route('clients.update', $id );
+        $action = route('payment_methods.update', $id );
         $item = PaymentMethod::find($id);
+        $editMode = true;
         
-        return view('app.payment_method.create', compact('method','action','item'));
+        return view('app.payment_method.create', compact('method','action','item','editMode'));
     }
 
     /**
@@ -98,7 +100,7 @@ class PaymentMethodController extends Controller
 
         PaymentMethod::find($id)->update( request(['name']) );
         
-        return redirect('clients');
+        return redirect('payment_methods');
     }
 
     /**
@@ -111,6 +113,6 @@ class PaymentMethodController extends Controller
     {
 
         PaymentMethod::destroy($id);
-        return redirect('clients');
+        return redirect('payment_methods');
     }
 }
