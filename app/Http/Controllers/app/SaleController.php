@@ -57,9 +57,9 @@ class SaleController extends Controller
             'value'     => 'required|numeric'
         ]);
 
-        Sale::create( request(['client_id','value']) );
+        $sale = Sale::create( request(['client_id','value']) );
 
-        return redirect('sales');
+        return redirect()->route('sales.edit', ['id' => $sale->id] );
     }
 
     /**
@@ -81,7 +81,16 @@ class SaleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $method = 'POST';
+        $action = route('sales.update', $id);
+        $item = Sale::find($id);
+        
+        $clients = Client::all();
+        $payments = $item->payments;
+
+        $editMode = true;
+
+        return view('app.sale.edit', compact('method','action','item','editMode', 'clients','payments'));
     }
 
     /**
@@ -93,7 +102,16 @@ class SaleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request);
+
+        $this->validate($request, [
+            'client_id' => 'required|numeric',
+            'value'     => 'required|numeric'
+        ]);
+        Sale::find($id)->update( request(['client_id','value']) );
+
+
+        return redirect()->route('sales.edit', ['id' => $id] );
     }
 
     /**
