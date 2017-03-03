@@ -54,7 +54,7 @@
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
 
-                            <li><a href="{{ route('client') }}">Cliente</a></li>
+                            <li><a href="{{ url('payment_methods') }}">Métodos de Pagamento</a></li>
                             <!-- <li><a href="{{ route('register') }}">Register</a></li> -->
 
                             <li class="dropdown">
