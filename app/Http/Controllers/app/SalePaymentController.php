@@ -120,4 +120,24 @@ class SalePaymentController extends Controller
     {
         //
     }
+
+    /**
+     * Show the form for creating a new bordero.
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function createBordero(Request $request)
+    {
+        $sale = SalePayment::find( $request['sale_id'] );
+
+        $value      = $request['value'];
+        $dateInit   = $request['date_init'];
+        $qtd        = $request['qtd'];
+
+        dd( $request->all() );
+
+        return view('app.sale_payment.bordero', compact('sale','value','dateInit','qtd'));
+    }
+
+    
 }

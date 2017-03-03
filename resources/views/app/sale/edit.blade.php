@@ -14,7 +14,17 @@
 			}).done(function( data ) {
 				$('#paymentHolder').html(data);
 			    $('#paymentHolder').show();
+
+			    $('html, body').animate({
+			        scrollTop: $("#paymentHolder").offset().top
+			    }, 1000);
+
+			    $('#newPayment').hide();
 			});
+		});
+
+		$('#newBordero').click(function(){
+			$('#borderoForm').slideToggle();
 		});
 
 		@if (count($errors) > 0)
@@ -27,11 +37,14 @@
 			$.ajax({
 			  method: "GET",
 			  url: "/sale_payments/"+idPayment+"/edit",
-			  dataType: "html"//,
-			  // data: { id: idPayment  }
+			  dataType: "html"
 			}).done(function( data ) {
 				$('#paymentHolder').html(data);
 			    $('#paymentHolder').show();
+
+			    $('html, body').animate({
+			        scrollTop: $("#paymentHolder").offset().top
+			    }, 1000);
 			});
 	}
 </script>
@@ -71,8 +84,51 @@
 					<input type="text" class="form-control" name="value" placeholder="999,999.99" value="{{ $item->value }}" >
 				</div>
 
-				<button type="submit" class="btn btn-default">Submit</button>
+				
+
+				<div class="row">
+					<div class="col-md-4">
+						<button type="submit" class="btn btn-default">Submit</button>
+					</div>
+					<div class="col-md-4 col-md-offset-4">
+						<button id="newBordero" type="button" class="btn btn-primary btn-lg">Gerar novo borderô</button>	
+					</div>
+				</div>
+				
 			</form>
+
+
+			<!--  GERAÇÃO DE BORDERÔ -->
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-6 col-md-4 col-md-offset-8 col-xl-4 col-xl-offset-8">
+					<form id="borderoForm" method="POST" action="/sale_payments/create_bordero" style="display: none;">
+						{{ csrf_field() }}
+
+						<input name="sale_id" type="hidden" value="{{ $item->id }}">
+
+						<div class="form-group">
+							<label for="value">Valor Total a ser pago</label>
+							<input type="text" class="form-control" name="value" placeholder="999,999.99">
+						</div>
+
+						<div class="form-group">
+							<label for="date_init">Primeiro Vencimento</label>
+							<input type="text" class="form-control" name="date_init" placeholder="yyyy-mm-dd">
+						</div>
+
+						<div class="form-group">
+							<label for="qtd">Quantidade de prestações</label>
+							<input type="text" class="form-control" name="qtd">
+						</div>
+
+						<button type="submit" class="btn btn-default">Criar</button>
+
+					</form>
+				</div>
+			</div>
+			
+			<!--  /GERAÇÃO DE BORDERÔ -->
+
 
 			<div class="page-header">
 			  <h1>Pagamentos <small>Lista</small></h1>
