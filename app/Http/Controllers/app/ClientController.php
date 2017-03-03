@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\app;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+
+use Validator;
+
 use App\Http\Controllers\Controller;
 use App\Client;
 
@@ -49,11 +53,12 @@ class ClientController extends Controller
     public function store(Request $request)
     {     
         $this->validate($request, [
-            'name' => 'required|unique:client|max:255',
-            'email' => 'required|email|unique:client'
+            'name' =>   'required|unique:client|max:255',
+            'email' =>  'nullable|email',
+            'cpf' =>    'nullable|cpf',
         ]);
 
-        Client::create( request(['name','email','rg','cpf', 'address']) );
+        Client::create( request(['name','email','rg','cpf','address','phone','celphone']) );
 
         return redirect('clients');
     }
@@ -95,11 +100,21 @@ class ClientController extends Controller
     public function update(Request $request, $id)
     {
         
-        $this->validate($request, [
-            'name' => 'required|unique:client|max:255'
-        ]);
+        $validator = Validator::make($request->all(), [
+            'name' => [
+                'required',
+                Rule::unique('client')->ignore($id),
+            ],
+            'email' =>  'nullable|email',
+            // 'cpf' =>    '999.999.999-99',
+            'cpf' =>    'nullable|cpf',
+            'phone' => '(77)99999-3333',
+            'phone' => 'nullable|telefone_com_ddd',
+            'celphone' => '(77)99999-3333',
+            'celphone' => 'nullable|telefone_com_ddd',
+        ])->validate();
 
-        Client::find($id)->update( request(['name','email','rg','cpf', 'address']) );
+        Client::find($id)->update( request(['name','email','rg','cpf','address','phone','celphone']) );
         
         return redirect('clients');
     }

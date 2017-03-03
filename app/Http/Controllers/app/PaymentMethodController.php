@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\app;
 
+use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\PaymentMethod;
@@ -94,9 +95,14 @@ class PaymentMethodController extends Controller
     public function update(Request $request, $id)
     {
         
-        $this->validate($request, [
-            'name' => 'required|unique:payment_method|max:255'
-        ]);
+        Validator::make($request->all(), [
+            'name' => [
+                'required',
+                Rule::unique('payment_method')->ignore($id),
+            ],
+            'email' =>  'nullable|email',
+            'cpf' =>    'nullable|cpf'
+        ])->validate();
 
         PaymentMethod::find($id)->update( request(['name']) );
         

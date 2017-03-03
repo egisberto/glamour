@@ -39,8 +39,13 @@
 				</div>
 
 				<div class="form-group">
-					<label for="address">Endereço</label>
-					<input type="text" class="form-control" name="address" placeholder="Endereço Completo" value="{{ $item->address }}" >
+					<label for="phone">Telefone</label>
+					<input type="text" class="form-control" name="phone" placeholder="Telefone: (99)99999-9999" value="{{ $item->phone }}" >
+				</div>
+
+				<div class="form-group">
+					<label for="celphone">celular</label>
+					<input type="text" class="form-control" name="celphone" placeholder="Celular: (99)99999-9999" value="{{ $item->celphone }}" >
 				</div>
 
 				<button type="submit" class="btn btn-default">Submit</button>
