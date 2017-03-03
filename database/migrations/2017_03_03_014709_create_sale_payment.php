@@ -25,7 +25,9 @@ class CreateSalePayment extends Migration
             // Foreign Keys
             $table->foreign('sale_id')->references('id')->on('sale');
             $table->foreign('payment_method_id')->references('id')->on('payment_method');
-            
+
+            // Soft Deletes
+            // $table->softDeletes();
         });
     }
 

@@ -22,3 +22,4 @@ Route::get('/home', 'HomeController@index');
 Route::resource('payment_methods', 'app\PaymentMethodController');
 Route::resource('clients', 'app\ClientController');
 Route::resource('sales', 'app\SaleController');
+Route::resource('sale_payments', 'app\SalePaymentController');

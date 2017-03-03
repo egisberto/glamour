@@ -2,6 +2,40 @@
 
 @section('content')
 
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$('#newPayment').click(function(){
+			$.ajax({
+			  method: "GET",
+			  url: "{{ route('sale_payments.create') }}",
+			  dataType: "html",
+			  data: { sale_id: {{ $item->id }} }
+			}).done(function( data ) {
+				$('#paymentHolder').html(data);
+			    $('#paymentHolder').show();
+			});
+		});
+
+		@if (count($errors) > 0)
+			$('#newPayment').trigger('click');
+		@endif
+
+	});
+
+	function editPayment(idPayment) {
+			$.ajax({
+			  method: "GET",
+			  url: "/sale_payments/"+idPayment+"/edit",
+			  dataType: "html"//,
+			  // data: { id: idPayment  }
+			}).done(function( data ) {
+				$('#paymentHolder').html(data);
+			    $('#paymentHolder').show();
+			});
+	}
+</script>
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
@@ -40,6 +74,10 @@
 				<button type="submit" class="btn btn-default">Submit</button>
 			</form>
 
+			<div class="page-header">
+			  <h1>Pagamentos <small>Lista</small></h1>
+			</div>
+
 			<div class="bs-example" data-example-id="striped-table"> 
 				<table class="table table-striped"> 
 					<thead> <tr> <th>#</th> <th>Forma</th> <th>Valor</th> <th>Descriçao</th> <th>Data/Hora</th> <th>Açoes</th> </tr> </thead> 
@@ -52,7 +90,7 @@
 							<td>{{ $payment->description }}</td>
 							<td>{{ $payment->created_at }}</td>
 							<td>
-								<a href="/sales/{{ $payment->id }}/edit">Edit</a>
+								<a href="javascript:editPayment( {{ $payment->id }} )">Edit</a>
 
 								<!-- <a href="#" onclick="event.preventDefault();
                                                      document.getElementById('delete-form-{{ $payment->id }}').submit();">Del</a>
@@ -67,7 +105,10 @@
 					</tbody>
 				</table>
 
-				<a href="/sales/create"><span class="label label-primary">Novo</span></a>
+				<a href="javascript:void(0);" id="newPayment"><span class="label label-primary">Novo</span></a>
+			</div>
+
+			<div class="jumbotron" id="paymentHolder" style="display: none;">
 			</div>
 
 		</div> 
