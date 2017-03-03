@@ -56,6 +56,7 @@
 
                             <li><a href="{{ url('payment_methods') }}">Métodos de Pagamento</a></li>
                             <li><a href="{{ url('clients') }}">Clientes</a></li>
+                            <li><a href="{{ url('sales') }}">Vendas</a></li>
 
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
