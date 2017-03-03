@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::resource('payment_methods', 'app\PaymentMethodController');
+Route::resource('clients', 'app\ClientController');

@@ -4,9 +4,9 @@ namespace App\Http\Controllers\app;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\PaymentMethod;
+use App\Client;
 
-class PaymentMethodController extends Controller
+class ClientController extends Controller
 {
     public function __construct()
     {
@@ -20,9 +20,9 @@ class PaymentMethodController extends Controller
      */
     public function index()
     {
-        $items = PaymentMethod::all();
+        $items = Client::all();
 
-        return view('app.payment_method.index', ['items' => $items]);
+        return view('app.client.index', ['items' => $items]);
     }
 
     /**
@@ -34,9 +34,9 @@ class PaymentMethodController extends Controller
     {
         $method = 'POST';
         $action = route('clients.store');
-        $item = new PaymentMethod();
+        $item = new Client();
 
-        return view('app.payment_method.create', compact('method','action','item'));
+        return view('app.client.create', compact('method','action','item'));
     }
 
     /**
@@ -48,10 +48,10 @@ class PaymentMethodController extends Controller
     public function store(Request $request)
     {     
         $this->validate($request, [
-            'name' => 'required|unique:payment_method|max:255'
+            'name' => 'required|unique:client|max:255'
         ]);
 
-        PaymentMethod::create( request(['name']) );
+        Client::create( request(['name']) );
 
         return redirect('clients');
     }
@@ -77,9 +77,9 @@ class PaymentMethodController extends Controller
     {
         $method = 'POST';
         $action = route('clients.update', $id );
-        $item = PaymentMethod::find($id);
+        $item = Client::find($id);
         
-        return view('app.payment_method.create', compact('method','action','item'));
+        return view('app.client.create', compact('method','action','item'));
     }
 
     /**
@@ -93,10 +93,10 @@ class PaymentMethodController extends Controller
     {
         
         $this->validate($request, [
-            'name' => 'required|unique:payment_method|max:255'
+            'name' => 'required|unique:client|max:255'
         ]);
 
-        PaymentMethod::find($id)->update( request(['name']) );
+        Client::find($id)->update( request(['name']) );
         
         return redirect('clients');
     }
@@ -110,7 +110,7 @@ class PaymentMethodController extends Controller
     public function destroy($id)
     {
 
-        PaymentMethod::destroy($id);
+        Client::destroy($id);
         return redirect('clients');
     }
 }
