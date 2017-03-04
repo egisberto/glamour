@@ -180,6 +180,9 @@ return [
         // PT-BR Validators
         LaravelLegends\PtBrValidator\ValidatorProvider::class,
 
+        // DOM PDF
+        Barryvdh\DomPDF\ServiceProvider::class,
+
     ],
 
     /*

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Sale;
 use App\SalePayment;
 use App\PaymentMethod;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class SalePaymentController extends Controller
 {
@@ -128,15 +129,18 @@ class SalePaymentController extends Controller
      */
     public function createBordero(Request $request)
     {
-        $sale = SalePayment::find( $request['sale_id'] );
+        $sale = Sale::find( $request['sale_id'] );
 
         $value      = $request['value'];
-        $dateInit   = $request['date_init'];
+        $dateInit   = date_create($request['date_init']);
         $qtd        = $request['qtd'];
 
-        dd( $request->all() );
+        // return PDF::loadFile(public_path().'/myfile.html')->save('/path-to/my_stored_file.pdf')->stream('download.pdf');
 
-        return view('app.sale_payment.bordero', compact('sale','value','dateInit','qtd'));
+        $pdf = PDF::loadView('app.sale_payment.bordero', compact('sale','value','dateInit','qtd') );
+        return $pdf->download('bordero.pdf');
+        
+        // return view('app.sale_payment.bordero', compact('sale','value','dateInit','qtd'));
     }
 
     
