@@ -91,7 +91,13 @@ class SaleController extends Controller
 
         $editMode = true;
 
-        return view('app.sale.edit', compact('method','action','item','editMode', 'clients','payments'));
+        //PDF file is stored under project/public/download/info.pdf
+        $file = "";
+        if ( file_exists( public_path(). "/borderos/bordero_$id.pdf") ) {
+            $file = public_path(). "/borderos/bordero_$id.pdf";    
+        }
+        
+        return view('app.sale.edit', compact('method','action','item','editMode', 'clients','payments','file'));
     }
 
     /**

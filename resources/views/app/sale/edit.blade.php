@@ -58,6 +58,18 @@
 
 			@include('layouts.errors')
 
+			<div class="row">
+				<div class="col-md-2">
+					@if ( !empty($file) )
+						<a href="/borderos/bordero_{{ $item->id }}.pdf" target="_new">
+							<i class="fa fa-file-pdf-o fa-3x" aria-hidden="true" title="Download do Borderô previamente gerado"></i>
+						</a>
+					@endif
+				</div>
+			</div>
+			
+			<br />
+
 			<form method="{{ $method }}" action="{{ $action }}">
 				{{ csrf_field() }}
 
@@ -90,9 +102,11 @@
 					<div class="col-md-4">
 						<button type="submit" class="btn btn-default">Submit</button>
 					</div>
+
 					<div class="col-md-4 col-md-offset-4">
-						<button id="newBordero" type="button" class="btn btn-primary btn-lg">Gerar novo borderô</button>	
+						<button id="newBordero" type="button" class="btn btn-primary btn-lg">Gerar novo borderô</button>
 					</div>
+
 				</div>
 				
 			</form>

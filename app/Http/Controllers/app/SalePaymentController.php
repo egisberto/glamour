@@ -86,7 +86,6 @@ class SalePaymentController extends Controller
 
         $paymentMethods = PaymentMethod::all();
 
-        
         return view('app.sale_payment.create', compact('action','item','editMode', 'paymentMethods','sale_id'));
     }
 
@@ -135,13 +134,15 @@ class SalePaymentController extends Controller
         $dateInit   = date_create($request['date_init']);
         $qtd        = $request['qtd'];
 
-        // return PDF::loadFile(public_path().'/myfile.html')->save('/path-to/my_stored_file.pdf')->stream('download.pdf');
+        if ( file_exists( public_path(). "/borderos/bordero_{$request['sale_id']}.pdf") ) {
+            unlink(public_path(). "/borderos/bordero_{$request['sale_id']}.pdf");
+        }
 
-        $pdf = PDF::loadView('app.sale_payment.bordero', compact('sale','value','dateInit','qtd') );
-        return $pdf->download('bordero.pdf');
-        
         // return view('app.sale_payment.bordero', compact('sale','value','dateInit','qtd'));
+        
+        $pdf = PDF::loadView('app.sale_payment.bordero', compact('sale','value','dateInit','qtd') );
+        return $pdf->save("borderos/bordero_{$request['sale_id']}.pdf")
+                    ->download("bordero_{$request['sale_id']}.pdf");
     }
 
-    
 }

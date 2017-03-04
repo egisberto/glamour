@@ -23,9 +23,9 @@
 				font-family: sans-serif;
 				color: black;
 				width: 160mm;
-				/*height: 65mm;*/
 				margin: 5px 0px 10px 0px;
 				table-layout: fixed;
+				page-break-inside: avoid;
 			}
 				table, th, td {
 				    border: 1px solid black;
@@ -38,20 +38,20 @@
 			    page-break-after: always;
 			}
 		</style>
-
-	    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
 	</head>
 	<body>
-
 		@for ($i = 1; $i <= $qtd; $i++)
-
 			@php
-				
-				if ($i > 1 ) {
-					date_add($dateInit, date_interval_create_from_date_string( '1 month'));
-				}
+			if ( $i > 1 ) {
+				date_add($dateInit, date_interval_create_from_date_string( '1 month'));
+			}
+
+			$class = "";
+			if ( ($i % 4 ) == 0 ) {
+				$class = 'page-break';
+			}
 			@endphp
-		    <table> 
+		    <table class="{{ $class }}"> 
 				<tbody> 
 					<tr valign="middle">
 						<td height="28">PEDIDO NÚMERO</td><td height="28">{{ $sale->id }}</td><td height="28">VALOR TOTAL</td><td height="28">R$ {{ $value }}</td>
@@ -66,7 +66,7 @@
 						<td height="28">IDENTIDADE</td><td height="28">{{ $sale->client->rg }}</td><td height="28">CPF</td><td height="28">{{ $sale->client->cpf }}</td>
 					</tr>
 					<tr valign="middle">
-						<td height="28">DATA DE EMISSÃO</td><td height="28">{{ date('d/m/Y') }}</td><td height="28">PARCELA</td><td height="28">{{ $i/$qtd }}</td>
+						<td height="28">DATA DE EMISSÃO</td><td height="28">{{ date('d/m/Y') }}</td><td height="28">PARCELA</td><td height="28">{{ $i }} / {{ $qtd }}</td>
 					</tr>
 					<tr valign="middle">
 						<td height="28">VENCIMENTO PARC.</td><td height="28">{{ date_format($dateInit,'d/m/Y') }}</td><td height="28">VALOR DA PARCELA</td><td height="28">R$ {{ $value/$qtd }}</td>
