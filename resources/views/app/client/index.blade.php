@@ -33,7 +33,8 @@
 					</tbody>
 				</table>
 
-				<a href="/clients/create"><span class="label label-primary">Novo</span></a>
+				<a href="/clients/create"><button type="button" class="btn btn-primary btn-lg">Novo</button></a>
+				
 			</div>
 		</div>
 	</div>

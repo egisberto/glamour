@@ -34,7 +34,7 @@
 					</tbody>
 				</table>
 
-				<a href="/sales/create"><span class="label label-primary">Novo</span></a>
+				<a href="/sales/create"><button type="button" class="btn btn-primary btn-lg">Novo</button></a>
 			</div>
 		</div>
 	</div>
