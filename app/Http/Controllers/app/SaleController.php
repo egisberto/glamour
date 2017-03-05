@@ -42,7 +42,14 @@ class SaleController extends Controller
 
         $editMode = false;
 
-        return view('app.sale.create', compact('method','action','item','editMode', 'clients'));
+        $conditionDefault = 
+        "Armação\t\t\tR$ \n" .
+        "Lente\t\t\t\tR$ \n" .
+        "Total\t\t\t\tR$ \n" .
+        "Total com Desconto\tR$ \n" .
+        "Entrada\t\t\t\tR$ \n";
+
+        return view('app.sale.create', compact('method','action','item','editMode', 'clients', 'conditionDefault'));
     }
 
     /**
@@ -55,10 +62,28 @@ class SaleController extends Controller
     {
         $this->validate($request, [
             'client_id' => 'required|numeric',
-            'value'     => 'required|numeric'
+            'value'     => 'required|numeric',
+            'description' => 'nullable|string',
+            'condition' => 'nullable|string',
+            'longe_od_esferico' => 'nullable|numeric',
+            'longe_od_cilindrico' => 'nullable|numeric',
+            'longe_od_eixo' => 'nullable|numeric',
+            'longe_od_dp' => 'nullable|numeric',
+            'longe_oe_esferico' => 'nullable|numeric',
+            'longe_oe_cilindrico' => 'nullable|numeric',
+            'longe_oe_eixo' => 'nullable|numeric',
+            'longe_oe_dp' => 'nullable|numeric',
+            'perto_od_esferico' => 'nullable|numeric',
+            'perto_od_cilindrico' => 'nullable|numeric',
+            'perto_od_eixo' => 'nullable|numeric',
+            'perto_od_dp' => 'nullable|numeric',
+            'perto_oe_esferico' => 'nullable|numeric',
+            'perto_oe_cilindrico' => 'nullable|numeric',
+            'perto_oe_eixo' => 'nullable|numeric',
+            'perto_oe_dp' => 'nullable|numeric'
         ]);
 
-        $sale = Sale::create( request(['client_id','value']) );
+        $sale = Sale::create( request(['client_id','value','description','condition','longe_od_esferico','longe_od_cilindrico','longe_od_eixo','longe_od_dp','longe_oe_esferico','longe_oe_cilindrico','longe_oe_eixo','longe_oe_dp','perto_od_esferico','perto_od_cilindrico','perto_od_eixo','perto_od_dp','perto_oe_esferico','perto_oe_cilindrico','perto_oe_eixo','perto_oe_dp']) );
 
         return redirect()->route('sales.edit', ['id' => $sale->id] );
     }
@@ -113,9 +138,27 @@ class SaleController extends Controller
 
         $this->validate($request, [
             'client_id' => 'required|numeric',
-            'value'     => 'required|numeric'
+            'value'     => 'required|numeric',
+            'description' => 'nullable|string',
+            'condition' => 'nullable|string',
+            'longe_od_esferico' => 'nullable|numeric',
+            'longe_od_cilindrico' => 'nullable|numeric',
+            'longe_od_eixo' => 'nullable|numeric',
+            'longe_od_dp' => 'nullable|numeric',
+            'longe_oe_esferico' => 'nullable|numeric',
+            'longe_oe_cilindrico' => 'nullable|numeric',
+            'longe_oe_eixo' => 'nullable|numeric',
+            'longe_oe_dp' => 'nullable|numeric',
+            'perto_od_esferico' => 'nullable|numeric',
+            'perto_od_cilindrico' => 'nullable|numeric',
+            'perto_od_eixo' => 'nullable|numeric',
+            'perto_od_dp' => 'nullable|numeric',
+            'perto_oe_esferico' => 'nullable|numeric',
+            'perto_oe_cilindrico' => 'nullable|numeric',
+            'perto_oe_eixo' => 'nullable|numeric',
+            'perto_oe_dp' => 'nullable|numeric'
         ]);
-        Sale::find($id)->update( request(['client_id','value']) );
+        Sale::find($id)->update( request(['client_id','value','description','condition','longe_od_esferico','longe_od_cilindrico','longe_od_eixo','longe_od_dp','longe_oe_esferico','longe_oe_cilindrico','longe_oe_eixo','longe_oe_dp','perto_od_esferico','perto_od_cilindrico','perto_od_eixo','perto_od_dp','perto_oe_esferico','perto_oe_cilindrico','perto_oe_eixo','perto_oe_dp']) );
 
 
         return redirect()->route('sales.edit', ['id' => $id] );
