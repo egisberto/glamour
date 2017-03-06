@@ -137,8 +137,6 @@ class SalePaymentController extends Controller
         if ( file_exists( public_path(). "/borderos/bordero_{$request['sale_id']}.pdf") ) {
             unlink(public_path(). "/borderos/bordero_{$request['sale_id']}.pdf");
         }
-
-        // return view('app.sale_payment.bordero', compact('sale','value','dateInit','qtd'));
         
         $pdf = PDF::loadView('app.sale_payment.bordero', compact('sale','value','dateInit','qtd') );
         return $pdf->save("borderos/bordero_{$request['sale_id']}.pdf")

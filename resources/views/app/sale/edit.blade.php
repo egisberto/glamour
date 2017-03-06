@@ -1,5 +1,26 @@
 @extends('layouts.app')
 
+<!-- Styles -->
+<style type="text/css">
+	table {
+		font-size: 14px;
+		/*font-family: sans-serif;*/
+		color: black;
+		width: 160mm;
+		margin: 5px 0px 10px 0px;
+		table-layout: fixed;
+		page-break-inside: avoid;
+	}
+		table, th, td, th {
+		    border: 1px solid black;
+		    border-collapse: collapse;
+		}
+
+		td { padding-left: 5px; }
+
+		th { text-align: center !important; }
+</style>
+
 @section('content')
 
 <script type="text/javascript">
@@ -192,13 +213,61 @@
 					</div>
 
 					<div class="col-md-4 col-md-offset-4">
-						<button id="newBordero" type="button" class="btn btn-primary btn-lg">Gerar novo borderô</button>
+						<button type="button" class="btn btn-danger btn-md" onclick="event.preventDefault();
+                                                     document.getElementById('generateOS-form').submit();">Gerar OS</button>
 					</div>
-
 				</div>
 				
 			</form>
 
+			<form id="generateOS-form" action="{{ url('/sales/generate_os') }}" method="POST" style="display: none;">
+            	{{ csrf_field() }}
+
+            	<input name="id" type="hidden" value="{{ $item->id }}" />
+            </form>
+
+		<div class="page-header">
+			  <h1>Pagamentos <small>Lista</small></h1>
+			</div>
+
+			<div class="bs-example" data-example-id="striped-table"> 
+				<table class="table table-striped"> 
+					<thead> <tr> <th>#</th> <th>Forma</th> <th>Valor</th> <th>Descriçao</th> <th>Data/Hora</th> <th>Açoes</th> </tr> </thead> 
+					<tbody> 
+					@foreach ($payments as $payment)
+						<tr> 
+							<th scope="row">{{ $payment->id }}</th>
+							<td>{{ $payment->paymentMethod->name }}</td>
+							<td>{{ $payment->value }}</td>
+							<td>{{ $payment->description }}</td>
+							<td>{{ $payment->created_at }}</td>
+							<td>
+								<a href="javascript:editPayment( {{ $payment->id }} )">Edit</a>
+
+								<!-- <a href="#" onclick="event.preventDefault();
+                                                     document.getElementById('delete-form-{{ $payment->id }}').submit();">Del</a>
+
+                                        <form id="delete-form-{{ $payment->id }}" action="{{ route('sales.destroy', $payment->id) }}" method="POST" style="display: none;">
+                                        	<input name="_method" type="hidden" value="DELETE">
+                                            {{ csrf_field() }}
+                                        </form> -->
+							</td>
+						</tr>
+					@endforeach
+					</tbody>
+				</table>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4">
+					<a href="javascript:void(0);"><button type="button" class="btn btn-primary btn-md">Novo</button></a>
+				</div>
+
+				<div class="col-md-4 col-md-offset-4">
+					<button id="newBordero" type="button" class="btn btn-success btn-md">Gerar novo borderô</button>
+				</div>
+
+			</div>
 
 			<!--  GERAÇÃO DE BORDERÔ -->
 			<div class="row">
@@ -230,41 +299,6 @@
 			</div>
 			
 			<!--  /GERAÇÃO DE BORDERÔ -->
-
-
-			<div class="page-header">
-			  <h1>Pagamentos <small>Lista</small></h1>
-			</div>
-
-			<div class="bs-example" data-example-id="striped-table"> 
-				<table class="table table-striped"> 
-					<thead> <tr> <th>#</th> <th>Forma</th> <th>Valor</th> <th>Descriçao</th> <th>Data/Hora</th> <th>Açoes</th> </tr> </thead> 
-					<tbody> 
-					@foreach ($payments as $payment)
-						<tr> 
-							<th scope="row">{{ $payment->id }}</th>
-							<td>{{ $payment->paymentMethod->name }}</td>
-							<td>{{ $payment->value }}</td>
-							<td>{{ $payment->description }}</td>
-							<td>{{ $payment->created_at }}</td>
-							<td>
-								<a href="javascript:editPayment( {{ $payment->id }} )">Edit</a>
-
-								<!-- <a href="#" onclick="event.preventDefault();
-                                                     document.getElementById('delete-form-{{ $payment->id }}').submit();">Del</a>
-
-                                        <form id="delete-form-{{ $payment->id }}" action="{{ route('sales.destroy', $payment->id) }}" method="POST" style="display: none;">
-                                        	<input name="_method" type="hidden" value="DELETE">
-                                            {{ csrf_field() }}
-                                        </form> -->
-							</td>
-						</tr>
-					@endforeach
-					</tbody>
-				</table>
-
-				<a href="javascript:void(0);" id="newPayment"><span class="label label-primary">Novo</span></a>
-			</div>
 
 			<div class="jumbotron" id="paymentHolder" style="display: none;">
 			</div>

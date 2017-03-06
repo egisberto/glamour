@@ -23,4 +23,6 @@ Route::resource('payment_methods', 'app\PaymentMethodController');
 Route::resource('clients', 'app\ClientController');
 Route::resource('sales', 'app\SaleController');
 Route::resource('sale_payments', 'app\SalePaymentController');
+
 Route::post('sale_payments/create_bordero', 'app\SalePaymentController@createBordero');
+Route::post('sales/generate_os', 'app\SaleController@generateOS');

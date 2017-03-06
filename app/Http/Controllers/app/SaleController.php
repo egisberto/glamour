@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Client;
 use App\Sale;
 use App\PaymentMethod;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class SaleController extends Controller
 {
@@ -162,6 +163,30 @@ class SaleController extends Controller
 
 
         return redirect()->route('sales.edit', ['id' => $id] );
+    }
+
+    /**
+     * Generates a OS from the sale
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function generateOS(Request $request)
+    {
+        $item = Sale::find($request['id']);
+
+        return view('app.sale.os', ['item' => $item, 'client' => $item->client] );
+
+        // $path = public_path(). "/OS/OS_{$request['id']}.pdf";
+
+        // if ( file_exists( $path ) ) {
+        //     unlink($path);
+        // }
+        
+        // $pdf = PDF::loadView('app.sale.os', ['item' => $item, 'client' => $item->client] );
+        // return $pdf->save($path)
+        //             ->download("OS_{$request['id']}.pdf");
+
     }
 
     /**
