@@ -7,7 +7,7 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <link href="http://glamour.dev/css/bootstrap.min.css" rel="stylesheet" media="all">
+        <link href="{{ public_path() }}/css/bootstrap.min.css" rel="stylesheet" media="all">
     </head>
     <body>
         @yield('content')
