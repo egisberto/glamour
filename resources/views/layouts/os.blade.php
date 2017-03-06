@@ -11,8 +11,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <script src="https://use.fontawesome.com/e881a3351a.js"></script>
+    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+    <!-- <script src="https://use.fontawesome.com/e881a3351a.js"></script> -->
+    <link href="http://glamour.dev/css/bootstrap.min.css" rel="stylesheet" media="all">
 
 </head>
 <body>
