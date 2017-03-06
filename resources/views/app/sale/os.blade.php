@@ -85,7 +85,7 @@
 	</div>
 	<div class="row">
 		<div class="col-xs-3">
-			<img src="http://glamour.dev/images/logo_glamour.png" alt="logo" class="img-thumbnail">
+			<img src="{{ public_path() }}/images/logo_glamour.png" alt="logo" class="img-thumbnail">
 		</div>
 		<div class="col-xs-3">
 			<address>
