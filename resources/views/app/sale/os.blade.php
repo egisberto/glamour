@@ -176,9 +176,19 @@
 									<input type="text" name="perto_oe_dp" class="form-control" value="{{ $item->perto_oe_dp }}"/>
 								</td>
 							</tr>
+
+							<tr>
+								<td valign="center" align="center" colspan="5" >Adição</td>
+								<td valign="center" align="center" colspan="2" ><input type="text" name="addition" class="form-control" value="{{ $item->addition }}"/></td>
+							</tr>
 							
 						</tbody>
 					</table>
+				</div>
+
+				<div class="form-group">
+					<label for="description_lab">Observações Lab.</label>
+					<textarea class="form-control" name="description_lab" style="height: 174px;">{{ $item->description_lab }}</textarea>
 				</div>
 				
 			</form>

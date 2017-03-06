@@ -50,7 +50,13 @@ class SaleController extends Controller
         "Total com Desconto\tR$ \n" .
         "Entrada\t\t\t\tR$ \n";
 
-        return view('app.sale.create', compact('method','action','item','editMode', 'clients', 'conditionDefault'));
+        $descriptionLabDefault = 
+        "Lentes: \n" .
+        "Armação: \n" .
+        "Cor: \n" .
+        "Obs: ";
+
+        return view('app.sale.create', compact('method','action','item','editMode', 'clients', 'conditionDefault', 'descriptionLabDefault'));
     }
 
     /**
@@ -84,7 +90,7 @@ class SaleController extends Controller
             'perto_oe_dp' => 'nullable|numeric'
         ]);
 
-        $sale = Sale::create( request(['client_id','value','description','condition','longe_od_esferico','longe_od_cilindrico','longe_od_eixo','longe_od_dp','longe_oe_esferico','longe_oe_cilindrico','longe_oe_eixo','longe_oe_dp','perto_od_esferico','perto_od_cilindrico','perto_od_eixo','perto_od_dp','perto_oe_esferico','perto_oe_cilindrico','perto_oe_eixo','perto_oe_dp']) );
+        $sale = Sale::create( request(['client_id','value','description','condition','longe_od_esferico','longe_od_cilindrico','longe_od_eixo','longe_od_dp','longe_oe_esferico','longe_oe_cilindrico','longe_oe_eixo','longe_oe_dp','perto_od_esferico','perto_od_cilindrico','perto_od_eixo','perto_od_dp','perto_oe_esferico','perto_oe_cilindrico','perto_oe_eixo','perto_oe_dp','addition','description_lab']) );
 
         return redirect()->route('sales.edit', ['id' => $sale->id] );
     }
@@ -159,7 +165,7 @@ class SaleController extends Controller
             'perto_oe_eixo' => 'nullable|numeric',
             'perto_oe_dp' => 'nullable|numeric'
         ]);
-        Sale::find($id)->update( request(['client_id','value','description','condition','longe_od_esferico','longe_od_cilindrico','longe_od_eixo','longe_od_dp','longe_oe_esferico','longe_oe_cilindrico','longe_oe_eixo','longe_oe_dp','perto_od_esferico','perto_od_cilindrico','perto_od_eixo','perto_od_dp','perto_oe_esferico','perto_oe_cilindrico','perto_oe_eixo','perto_oe_dp']) );
+        Sale::find($id)->update( request(['client_id','value','description','condition','longe_od_esferico','longe_od_cilindrico','longe_od_eixo','longe_od_dp','longe_oe_esferico','longe_oe_cilindrico','longe_oe_eixo','longe_oe_dp','perto_od_esferico','perto_od_cilindrico','perto_od_eixo','perto_od_dp','perto_oe_esferico','perto_oe_cilindrico','perto_oe_eixo','perto_oe_dp','addition','description_lab']) );
 
 
         return redirect()->route('sales.edit', ['id' => $id] );
