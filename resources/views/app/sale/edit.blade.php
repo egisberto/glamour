@@ -81,9 +81,17 @@
 
 			<div class="row">
 				<div class="col-md-2">
-					@if ( !empty($file) )
-						<a href="/borderos/bordero_{{ $item->id }}.pdf" target="_new">
+					@if ( !empty($fileBordero) )
+						<a href="/borderos/bordero_{{ $item->id }}.pdf" target="_new">Borderô
 							<i class="fa fa-file-pdf-o fa-3x" aria-hidden="true" title="Download do Borderô previamente gerado"></i>
+						</a>
+					@endif
+				</div>
+
+				<div class="col-md-2">
+					@if ( !empty($fileOS) )
+						<a href="/OS/OS_{{ $item->id }}.pdf" target="_new">PDF
+							<i class="fa fa-file-pdf-o fa-3x" aria-hidden="true" title="Download da OS"></i>
 						</a>
 					@endif
 				</div>

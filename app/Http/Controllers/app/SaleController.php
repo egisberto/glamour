@@ -123,13 +123,19 @@ class SaleController extends Controller
 
         $editMode = true;
 
-        //PDF file is stored under project/public/download/info.pdf
-        $file = "";
+        //Borderô PDF file is stored under project/public/download/info.pdf
+        $fileBordero = "";
         if ( file_exists( public_path(). "/borderos/bordero_$id.pdf") ) {
-            $file = public_path(). "/borderos/bordero_$id.pdf";    
+            $fileBordero = public_path(). "/borderos/bordero_$id.pdf";    
         }
         
-        return view('app.sale.edit', compact('method','action','item','editMode', 'clients','payments','file'));
+        //OS PDF file is stored under project/public/download/info.pdf
+        $fileOS = "";
+        if ( file_exists( public_path(). "/OS/OS_$id.pdf") ) {
+            $fileOS = public_path(). "/OS/OS_$id.pdf";    
+        }
+        
+        return view('app.sale.edit', compact('method','action','item','editMode', 'clients','payments','fileBordero','fileOS'));
     }
 
     /**
@@ -181,17 +187,18 @@ class SaleController extends Controller
     {
         $item = Sale::find($request['id']);
 
-        return view('app.sale.os', ['item' => $item, 'client' => $item->client] );
+        // return view('app.sale.os', ['item' => $item, 'client' => $item->client] );
 
-        // $path = public_path(). "/OS/OS_{$request['id']}.pdf";
+        $path = public_path(). "/OS/OS_{$request['id']}.pdf";
 
-        // if ( file_exists( $path ) ) {
-        //     unlink($path);
-        // }
+        if ( file_exists( $path ) ) {
+            unlink($path);
+        }
         
-        // $pdf = PDF::loadView('app.sale.os', ['item' => $item, 'client' => $item->client] );
-        // return $pdf->save($path)
-        //             ->download("OS_{$request['id']}.pdf");
+        $pdf = PDF::loadView('app.sale.os', ['item' => $item, 'client' => $item->client] );
+        // $pdf->setBasePath(public_path()."/css/app.css");
+        return $pdf->save($path)
+                    ->download("OS_{$request['id']}.pdf");
 
     }
 
