@@ -89,10 +89,10 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-xs-4">
+		<div class="col-xs-4" style="padding-right: 0px">
 			<img src="{{ public_path() }}/images/logo_glamour.png" alt="logo" class="img-thumbnail">
 		</div>
-		<div class="col-xs-6">
+		<div class="col-xs-6" style="padding-left: 0px">
 			<address class="text-right">
 			  <strong>Guaraí - TO</strong> Av. Bernardo Sayão - Esq. c/Rua 1 <br /> 
 			  Tel: (63) 3464-4979
