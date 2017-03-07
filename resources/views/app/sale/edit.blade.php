@@ -90,7 +90,7 @@
 
 				<div class="col-md-2">
 					@if ( !empty($fileOS) )
-						<a href="/OS/OS_{{ $item->id }}.pdf" target="_new">PDF
+						<a href="/OS/OS_{{ $item->id }}.pdf" target="_new">OS
 							<i class="fa fa-file-pdf-o fa-3x" aria-hidden="true" title="Download da OS"></i>
 						</a>
 					@endif

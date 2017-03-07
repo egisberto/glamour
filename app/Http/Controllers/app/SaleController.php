@@ -196,7 +196,6 @@ class SaleController extends Controller
         }
         
         $pdf = PDF::loadView('app.sale.os', ['item' => $item, 'client' => $item->client] );
-        // $pdf->setBasePath(public_path()."/css/app.css");
         return $pdf->save($path)
                     ->download("OS_{$request['id']}.pdf");
 
