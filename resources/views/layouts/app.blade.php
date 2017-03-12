@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/sidebar-menu.css') }}" rel="stylesheet">
+
     <script src="https://use.fontawesome.com/e881a3351a.js"></script>
 
     <!-- Scripts -->
@@ -38,7 +40,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
@@ -57,9 +59,9 @@
                             <!-- <li><a href="{{ route('register') }}">Register</a></li> -->
                         @else
 
-                            <li><a href="{{ url('payment_methods') }}">Métodos de Pagamento</a></li>
-                            <li><a href="{{ url('clients') }}">Clientes</a></li>
-                            <li><a href="{{ url('sales') }}">Vendas</a></li>
+                            <!-- <li><a href="{{ url('payment_methods') }}">Métodos de Pagamento</a></li>
+                            <li><a href="{{ url('clients') }}">Clientes</a></li> -->
+                            <li><a href="{{ url('sales') }}">OS</a></li>
 
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -86,11 +88,49 @@
             </div>
         </nav>
 
+        @if (Auth::check())
+            <nav class="navbar navbar-default sidebar" role="navigation">
+                <div class="container-fluid">
+                    <!-- <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>      
+                    </div> -->
+                    <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="{{ url('/home') }}">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+                            
+                            <li ><a href="{{ url('sales/create') }}">OS<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span></a></li>
+
+                            <li ><a href="{{ url('sales') }}">Vendas<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a></li>
+                            <li class="dropdown">
+                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Clientes <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
+                                  <ul class="dropdown-menu forAnimate" role="menu">
+                                    <li><a href="{{ url('clients') }}">Lista</a></li>
+                                    <li><a href="{{ url('clients/create') }}">Novo</a></li>
+                                    <!-- <li class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Informes</a></li> -->
+                                  </ul>
+                            </li>          
+                                    
+                            
+                        </ul>
+                    </div>
+              </div>
+            </nav>
+        @endif
+
         @yield('content')
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
     @yield('js')
 </body>
 </html>

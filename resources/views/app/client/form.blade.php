@@ -24,13 +24,14 @@
 		<div class="col-md-6">
 			<div class="form-group">
 				{{ Form::label('RG', null, ['class' => 'control-label']) }}
-				{{ Form::text('rg', null, ['class' => 'form-control', 'placeholder'=> '9.999.999']) }}					
+				{{ Form::text('rg', null, ['class' => 'form-control', 'placeholder'=> '9.999.999' ]) }}					
 			</div>
 		</div>
 		<div class="col-md-6">
 			<div class="form-group">
 				{{ Form::label('CPF', null, ['class' => 'control-label']) }}
-				{{ Form::text('cpf', null, ['class' => 'form-control', 'placeholder'=> '999.999.999-99']) }}					
+				{{ Form::text('cpf', null, ['class' => 'form-control', 'placeholder'=> '999.999.999-99', 
+					'data-mask' => '000.000.000-00', 'data-mask-reverse' =>'true' ]) }}
 			</div>
 		</div>
 	</div>
@@ -39,13 +40,15 @@
 		<div class="col-md-6">
 			<div class="form-group">
 				{{ Form::label('Telefone', null, ['class' => 'control-label']) }}
-				{{ Form::text('telefone', null, ['class' => 'form-control', 'placeholder'=> '(99)99999-9999']) }}					
+				{{ Form::text('telefone', null, ['class' => 'form-control celphone', 'placeholder'=> '(99) 99999-9999',
+					'data-mask' => '(00) 0000-0000']) }}
 			</div>
 		</div>
 		<div class="col-md-6">
 			<div class="form-group">
 				{{ Form::label('Celular', null, ['class' => 'control-label']) }}
-				{{ Form::text('celular', null, ['class' => 'form-control', 'placeholder'=> '(99)99999-9999']) }}					
+				{{ Form::text('celular', null, ['class' => 'form-control', 'placeholder'=> '(99) 99999-9999',
+					'data-mask' => '(00) 00000-0000']) }}
 			</div>
 		</div>
 	</div>
