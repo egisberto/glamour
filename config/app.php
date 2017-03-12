@@ -184,6 +184,10 @@ return [
         // DOM PDF
         Barryvdh\DomPDF\ServiceProvider::class,
 
+
+        // Inventary
+        'Stevebauman\Inventory\InventoryServiceProvider',
+
     ],
 
     /*
