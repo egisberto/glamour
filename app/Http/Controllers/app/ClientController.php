@@ -53,10 +53,16 @@ class ClientController extends Controller
     public function store(Request $request)
     {     
         
-        Validator::make($request->all(), [
-            'name' =>   'required|unique:client|max:255',
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
             'email' =>  'nullable|email',
+            'cpf' =>    '999.999.999-99',
             'cpf' =>    'nullable|cpf',
+            'phone' => '(77)9999-3333',
+            'phone' => 'nullable|telefone_com_ddd',
+            'celphone' => '(77)99999-3333',
+            'celphone' => 'nullable|celular_com_ddd',
+            'birth_date' => 'nullable|data'
         ])->validate();
 
         Client::create( request(['name','email','rg','cpf','address','phone','celphone','birth_date','address']) );
@@ -111,15 +117,14 @@ class ClientController extends Controller
                 Rule::unique('client')->ignore($id),
             ],
             'email' =>  'nullable|email',
-            // 'cpf' =>    '999.999.999-99',
+            'cpf' =>    '999.999.999-99',
             'cpf' =>    'nullable|cpf',
             'phone' => '(77)9999-3333',
             'phone' => 'nullable|telefone_com_ddd',
             'celphone' => '(77)99999-3333',
             'celphone' => 'nullable|celular_com_ddd',
+            'birth_date' => 'nullable|data'
         ])->validate();
-
-        // dd($request->all());
 
         Client::find($id)->update( request(['name','email','rg','cpf','address','phone','celphone','birth_date','address']) );
         
