@@ -53,23 +53,13 @@ class ClientController extends Controller
     public function store(Request $request)
     {     
         
-        // if($request->ajax()){
-        //     $this->validate($request, [
-        //         'name' =>   'required|unique:client|max:255',
-        //         'email' =>  'nullable|email',
-        //         'cpf' =>    'nullable|cpf',
-        //     ]);
-
-        //     return response()->json(['response' => 'This is a AJAX request']); 
-        // }
-        
         Validator::make($request->all(), [
             'name' =>   'required|unique:client|max:255',
             'email' =>  'nullable|email',
             'cpf' =>    'nullable|cpf',
         ])->validate();
 
-        Client::create( request(['name','email','rg','cpf','address','phone','celphone']) );
+        Client::create( request(['name','email','rg','cpf','address','phone','celphone','birth_date','address']) );
 
         if($request->ajax()){
             return response()->json(['response' => 'Cliente Cadastrado com sucesso!']); 
@@ -123,13 +113,15 @@ class ClientController extends Controller
             'email' =>  'nullable|email',
             // 'cpf' =>    '999.999.999-99',
             'cpf' =>    'nullable|cpf',
-            'phone' => '(77)99999-3333',
+            'phone' => '(77)9999-3333',
             'phone' => 'nullable|telefone_com_ddd',
             'celphone' => '(77)99999-3333',
-            'celphone' => 'nullable|telefone_com_ddd',
+            'celphone' => 'nullable|celular_com_ddd',
         ])->validate();
 
-        Client::find($id)->update( request(['name','email','rg','cpf','address','phone','celphone']) );
+        // dd($request->all());
+
+        Client::find($id)->update( request(['name','email','rg','cpf','address','phone','celphone','birth_date','address']) );
         
         return redirect('clients');
     }

@@ -15,8 +15,8 @@ class NullableDescriptionConditionOnSale extends Migration
     {
         Schema::table('sale', function (Blueprint $table) {
             //Date of Birth
-            $table->date('description')->nullable()->change();
-            $table->date('condition')->nullable()->change();
+            $table->text('description')->nullable()->change();
+            $table->text('condition')->nullable()->change();
         });
     }
 
@@ -29,8 +29,8 @@ class NullableDescriptionConditionOnSale extends Migration
     {
         Schema::table('sale', function (Blueprint $table) {
             //Date of Birth
-            $table->date('description')->change();
-            $table->date('condition')->change();
+            $table->text('description')->change();
+            $table->text('condition')->change();
         });
     }
 }

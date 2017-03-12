@@ -131,6 +131,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+    <script src="{{ asset('js/mask-defaults.js') }}"></script>
     @yield('js')
 </body>
 </html>
