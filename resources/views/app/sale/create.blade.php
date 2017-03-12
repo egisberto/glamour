@@ -32,36 +32,21 @@
 
 			@include('layouts.errors')
 
-			<form method="{{ $method }}" action="{{ $action }}">
-				{{ csrf_field() }}
-
-				@if ($editMode)
-                       <input name="_method" type="hidden" value="PUT">
-               	@endif
+			{!! Form::model($item, ['url' => $action, 'method' => 'POST']) !!}
+				{{ Form::clientListPlus('client_id', 'Cliente', $clients) }}
 				
 				<div class="form-group">
-					<label for="name">Cliente</label>
-					<select class="form-control" name="client_id">
-						<option value="">Escolha um cliente</option>
-						@foreach ($clients as $client)
-							<option value="{{ $client->id }}">{{ $client->name }}</option>
-						@endforeach
-					</select>
+					{{ Form::label('Condições de Pagamento', null, ['class' => 'control-label']) }}
+    				{{ Form::textarea('condition', $conditionDefault, ['class' => 'form-control']) }}
 				</div>
-
+		
 				<div class="form-group">
-					<label for="value">Condições de pagamento</label>
-					<textarea class="form-control" name="condition" style="height: 174px;">{{ $conditionDefault }}</textarea>
+					{{ Form::label('Observações', null, ['class' => 'control-label']) }}
+    				{{ Form::textarea('description', null, ['class' => 'form-control']) }}
 				</div>
-
 				<div class="form-group">
-					<label for="value">Observações</label>
-					<textarea class="form-control" name="description" style="height: 174px;"></textarea>
-				</div>
-
-				<div class="form-group">
-					<label for="value">Valor Final</label>
-					<input type="text" class="form-control" name="value" placeholder="999,999.99" value="{{ $item->value }}" >
+					{{ Form::label('Valor Final', null, ['class' => 'control-label']) }}
+    				{{ Form::text('value', null, ['class' => 'form-control', 'placeholder'=> '999.999,99']) }}
 				</div>
 				
 				<div class="bs-example" data-example-id="striped-table"> 
@@ -80,83 +65,132 @@
 								<td rowspan="2" colspan="2" valign="center" align="center">LONGE</td>
 								<td valign="center" align="center">OD</td>
 								<td valign="center" align="center">
-									<input type="text" name="longe_od_esferico" class="form-control"/>
+									{{ Form::text('longe_od_esferico', null, ['class' => 'form-control']) }}
 								</td>
 								<td valign="center" align="center">
-									<input type="text" name="longe_od_cilindrico" class="form-control"/>
+									{{ Form::text('longe_od_cilindrico', null, ['class' => 'form-control']) }}
 								</td>
 								<td valign="center" align="center">
-									<input type="text" name="longe_od_eixo" class="form-control"/>
+									{{ Form::text('longe_od_eixo', null, ['class' => 'form-control']) }}
 								</td>
 								<td valign="center" align="center">
-									<input type="text" name="longe_od_dp" class="form-control"/>
+									{{ Form::text('longe_od_dp', null, ['class' => 'form-control']) }}
 								</td>
 							</tr>
 							<tr>
 								<td valign="center" align="center">OE</td>
 								<td valign="center" align="center">
-									<input type="text" name="longe_oe_esferico" class="form-control"/>
+									{{ Form::text('longe_oe_esferico', null, ['class' => 'form-control']) }}
 								</td>
 								<td valign="center" align="center">
-									<input type="text" name="longe_oe_cilindrico" class="form-control"/>
+									{{ Form::text('longe_oe_cilindrico', null, ['class' => 'form-control']) }}
 								</td>
 								<td valign="center" align="center">
-									<input type="text" name="longe_oe_eixo" class="form-control"/>
+									{{ Form::text('longe_oe_eixo', null, ['class' => 'form-control']) }}
 								</td>
 								<td valign="center" align="center">
-									<input type="text" name="longe_oe_dp" class="form-control"/>
+									{{ Form::text('longe_oe_dp', null, ['class' => 'form-control']) }}
 								</td>
 							</tr>
 							<tr>
 								<td rowspan="2" colspan="2" valign="center" align="center">PERTO</td>
 								<td valign="center" align="center">OD</td>
 								<td valign="center" align="center">
-									<input type="text" name="perto_od_esferico" class="form-control"/>
+									{{ Form::text('perto_od_esferico', null, ['class' => 'form-control']) }}
 								</td>
 								<td valign="center" align="center">
-									<input type="text" name="perto_od_cilindrico" class="form-control"/>
+									{{ Form::text('perto_od_cilindrico', null, ['class' => 'form-control']) }}
 								</td>
 								<td valign="center" align="center">
-									<input type="text" name="perto_od_eixo" class="form-control"/>
+									{{ Form::text('perto_od_eixo', null, ['class' => 'form-control']) }}
 								</td>
 								<td valign="center" align="center">
-									<input type="text" name="perto_od_dp" class="form-control"/>
+									{{ Form::text('perto_od_dp', null, ['class' => 'form-control']) }}
 								</td>
 							</tr>
 							<tr>
 								<td valign="center" align="center">OE</td>
 								<td valign="center" align="center">
-									<input type="text" name="perto_oe_esferico" class="form-control"/>
+									{{ Form::text('perto_oe_esferico', null, ['class' => 'form-control']) }}
 								</td>
 								<td valign="center" align="center">
-									<input type="text" name="perto_oe_cilindrico" class="form-control"/>
+									{{ Form::text('perto_oe_cilindrico', null, ['class' => 'form-control']) }}
 								</td>
 								<td valign="center" align="center">
-									<input type="text" name="perto_oe_eixo" class="form-control"/>
+									{{ Form::text('perto_oe_eixo', null, ['class' => 'form-control']) }}
 								</td>
 								<td valign="center" align="center">
-									<input type="text" name="perto_oe_dp" class="form-control"/>
+									{{ Form::text('perto_oe_dp', null, ['class' => 'form-control']) }}
 								</td>
 							</tr>
 							<tr>
 								<td valign="center" align="center" colspan="5" >Adição</td>
 								<td valign="center" align="center" colspan="2" ><input type="text" name="addition" class="form-control"/></td>
 							</tr>
-							
 						</tbody>
 					</table>
 				</div>
 
 				<div class="form-group">
-					<label for="description_lab">Observações Laboratório.</label>
-					<textarea class="form-control" name="description_lab" style="height: 174px;">{{ $descriptionLabDefault }}</textarea>
+					{{ Form::label('Observações Laboratório', null, ['class' => 'control-label']) }}
+	    			{{ Form::textarea('description_lab', null, ['class' => 'form-control']) }}
 				</div>
 
-				<button type="submit" class="btn btn-default">Submit</button>
-			</form>
+				{!! Form::submit('Submit', ['class' => 'btn btn-default']) !!}
 
+            {!! Form::close() !!}
 		</div> 
 	</div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="clientModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Novo Cliente</h4>
+      </div>
+      <div class="modal-body">
+      	<div id="errorsHolder"></div>
+        @include('app.client.form')
+      </div>
+    </div>
+  </div>
+</div>
+
+@endsection
+
+@section('js')
+	<script type="text/javascript">
+		$(document).ready(function(){
+		});	
+
+		function submitClienForm(){
+			$.ajax({
+                type: "POST",
+                url : "/clients",
+                data : $('#clientForm').serialize(),
+                success : function(data){
+                    location.reload();
+                },
+                error : function(jqXhr){
+                	var data = jqXhr.responseJSON;
+
+                    console.log(data);
+
+		            errorsHtml = '<div class="alert alert-danger"><ul>';
+
+			        $.each( data, function( key, value ) {
+			            errorsHtml += '<li>' + value[0] + '</li>'; //showing only the first error.
+			        });
+
+		        errorsHtml += '</ul></di>';
+
+		        $( '#clientModal #errorsHolder' ).html( errorsHtml );
+                }
+            },"json");
+	    };
+	</script>
+	
 @endsection

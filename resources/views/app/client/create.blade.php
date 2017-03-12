@@ -5,54 +5,25 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
-				<div class="panel-heading">Clientes - Novo/Edit</div>
+			<div class="page-header">
+				<h1>Clientes 
+					  <small>@if ($editMode) Edição @else Novo @endif</small>
+				</h1>
 			</div>
-
+			
 			@include('layouts.errors')
-
-			<form method="{{ $method }}" action="{{ $action }}">
-				{{ csrf_field() }}
-
-				@if ($editMode)
-                       <input name="_method" type="hidden" value="PUT">
-               	@endif
-				
-				<div class="form-group">
-					<label for="name">Nome</label>
-					<input type="text" class="form-control" name="name" placeholder="Nome completo" value="{{ $item->name }}" >
-				</div>
-
-				<div class="form-group">
-					<label for="email">E-mail</label>
-					<input type="email" class="form-control" name="email" placeholder="E-mail" value="{{ $item->email }}" >
-				</div>
-
-				<div class="form-group">
-					<label for="rg">RG</label>
-					<input type="text" class="form-control"  name="rg" placeholder="RG" value="{{ $item->rg }}" >
-				</div>
-
-				<div class="form-group">
-					<label for="cpf">CPF</label>
-					<input type="text" class="form-control" name="cpf" placeholder="CPF" value="{{ $item->cpf }}" >
-				</div>
-
-				<div class="form-group">
-					<label for="phone">Telefone</label>
-					<input type="text" class="form-control" name="phone" placeholder="Telefone: (99)99999-9999" value="{{ $item->phone }}" >
-				</div>
-
-				<div class="form-group">
-					<label for="celphone">celular</label>
-					<input type="text" class="form-control" name="celphone" placeholder="Celular: (99)99999-9999" value="{{ $item->celphone }}" >
-				</div>
-
-				<button type="submit" class="btn btn-default">Submit</button>
-			</form>
-
+			@include('app.client.form')
 		</div> 
 	</div>
 </div>
 
+@endsection
+
+@section('js')
+	<script type="text/javascript">
+		function submitClienForm(){
+			$('#clientForm').submit();
+	    };
+	</script>
+	
 @endsection

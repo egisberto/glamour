@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\app;
 
 use Illuminate\Http\Request;
+use Validator;
+// use Redirect;
 use App\Http\Controllers\Controller;
 use App\Client;
 use App\Sale;
 use App\PaymentMethod;
 use Barryvdh\DomPDF\Facade as PDF;
-
+// use Illuminate\Support\Facades as Redirect;
 class SaleController extends Controller
 {
     public function __construct()
@@ -40,7 +42,8 @@ class SaleController extends Controller
         $item = new Sale();
 
         $clients = Client::all();
-
+        $clients = $clients->pluck('name','id');
+        
         $editMode = false;
 
         $conditionDefault = 

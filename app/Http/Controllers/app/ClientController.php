@@ -52,13 +52,28 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {     
-        $this->validate($request, [
+        
+        // if($request->ajax()){
+        //     $this->validate($request, [
+        //         'name' =>   'required|unique:client|max:255',
+        //         'email' =>  'nullable|email',
+        //         'cpf' =>    'nullable|cpf',
+        //     ]);
+
+        //     return response()->json(['response' => 'This is a AJAX request']); 
+        // }
+        
+        Validator::make($request->all(), [
             'name' =>   'required|unique:client|max:255',
             'email' =>  'nullable|email',
             'cpf' =>    'nullable|cpf',
-        ]);
+        ])->validate();
 
         Client::create( request(['name','email','rg','cpf','address','phone','celphone']) );
+
+        if($request->ajax()){
+            return response()->json(['response' => 'Cliente Cadastrado com sucesso!']); 
+        }
 
         return redirect('clients');
     }

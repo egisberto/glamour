@@ -6,6 +6,7 @@ use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\PaymentMethod;
+use Illuminate\Validation\Rule;
 
 class PaymentMethodController extends Controller
 {
@@ -33,12 +34,11 @@ class PaymentMethodController extends Controller
      */
     public function create()
     {
-        $method = 'POST';
         $action = route('payment_methods.store');
         $item = new PaymentMethod();
         $editMode = false;
 
-        return view('app.payment_method.create', compact('method','action','item','editMode'));
+        return view('app.payment_method.create', compact('item','action','editMode'));
     }
 
     /**
@@ -49,9 +49,11 @@ class PaymentMethodController extends Controller
      */
     public function store(Request $request)
     {     
-        $this->validate($request, [
-            'name' => 'required|unique:payment_method|max:255'
-        ]);
+        Validator::make($request->all(), [
+            'name' => ['required',
+                Rule::unique('payment_method'),
+            ]
+        ])->validate();
 
         PaymentMethod::create( request(['name']) );
 
@@ -77,7 +79,6 @@ class PaymentMethodController extends Controller
      */
     public function edit($id)
     {
-        $method = 'POST';
         $action = route('payment_methods.update', $id );
         $item = PaymentMethod::find($id);
         $editMode = true;
@@ -94,14 +95,10 @@ class PaymentMethodController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
         Validator::make($request->all(), [
-            'name' => [
-                'required',
+            'name' => ['required',
                 Rule::unique('payment_method')->ignore($id),
-            ],
-            'email' =>  'nullable|email',
-            'cpf' =>    'nullable|cpf'
+            ]
         ])->validate();
 
         PaymentMethod::find($id)->update( request(['name']) );
@@ -117,7 +114,6 @@ class PaymentMethodController extends Controller
      */
     public function destroy($id)
     {
-
         PaymentMethod::destroy($id);
         return redirect('payment_methods');
     }

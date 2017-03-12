@@ -5,8 +5,8 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
-				<div class="panel-heading">Vendas</div>
+			<div class="page-header">
+			  <h1>Vendas <small>Lista</small></h1>
 			</div>
 
 			<div class="bs-example" data-example-id="striped-table"> 
