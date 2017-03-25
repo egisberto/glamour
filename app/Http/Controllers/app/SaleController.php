@@ -25,6 +25,8 @@ class SaleController extends Controller
      */
     public function index()
     {
+        // dd(Sale::all()->toSql());
+
         $items = Sale::all();
 
         return view('app.sale.index', ['items' => $items]);
@@ -119,12 +121,11 @@ class SaleController extends Controller
     {
         $method = 'POST';
         $action = route('sales.update', $id);
-        $item = Sale::find($id);
-        
-        $clients = Client::all();
-        $payments = $item->payments;
-
         $editMode = true;
+
+        $item = Sale::find($id);
+        $payments = $item->payments;
+        $clients = Client::all();
 
         //Borderô PDF file is stored under project/public/download/info.pdf
         $fileBordero = "";

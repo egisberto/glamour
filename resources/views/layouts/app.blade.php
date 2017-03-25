@@ -125,6 +125,7 @@
             </nav>
         @endif
 
+        @include('layouts.success')
         @yield('content')
     </div>
 

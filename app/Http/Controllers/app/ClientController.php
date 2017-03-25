@@ -4,6 +4,7 @@ namespace App\Http\Controllers\app;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 use Validator;
 
@@ -65,7 +66,11 @@ class ClientController extends Controller
             'birth_date' => 'nullable|data'
         ])->validate();
 
-        Client::create( request(['name','email','rg','cpf','address','phone','celphone','birth_date','address']) );
+        $user = Auth::user();
+
+        $clientRequest = request(['name','email','rg','cpf','address','phone','celphone','birth_date','address']);
+        
+        Client::create( $clientRequest );
 
         if($request->ajax()){
             return response()->json(['response' => 'Cliente Cadastrado com sucesso!']); 

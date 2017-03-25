@@ -20,7 +20,7 @@
 
 				<div class="form-group">
 					{{ Form::label('Nome', null, ['class' => 'control-label']) }}
-    				{{ Form::text('name', null, ['class' => 'form-control', 'placeholder'=> 'Nome do método de pagamento']) }}					
+    				{{ Form::text('name', null, ['class' => 'form-control', 'placeholder'=> 'Nome do método de pagamento']) }}
 				</div>
 
 				{!! Form::submit('Submit', ['class' => 'btn btn-default']) !!}

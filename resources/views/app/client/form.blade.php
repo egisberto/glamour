@@ -37,7 +37,7 @@
 		<div class="col-md-6">
 			<div class="form-group">
 				{{ Form::label('CPF', null, ['class' => 'control-label']) }}
-				{{ Form::text('cpf', null, ['class' => 'form-control', 'placeholder'=> '999.999.999-99', 
+				{{ Form::text('cpf', null, ['class' => 'form-control cpf', 'placeholder'=> '000.000.000-00', 
 					'data-mask' => '000.000.000-00', 'data-mask-reverse' =>'true' ]) }}
 			</div>
 		</div>

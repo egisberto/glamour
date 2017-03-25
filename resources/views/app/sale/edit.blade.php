@@ -252,26 +252,28 @@
 				<table class="table table-striped"> 
 					<thead> <tr> <th>#</th> <th>Forma</th> <th>Valor</th> <th>Descriçao</th> <th>Data/Hora</th> <th>Açoes</th> </tr> </thead> 
 					<tbody> 
-					@foreach ($payments as $payment)
-						<tr> 
-							<th scope="row">{{ $payment->id }}</th>
-							<td>{{ $payment->paymentMethod->name }}</td>
-							<td>{{ $payment->value }}</td>
-							<td>{{ $payment->description }}</td>
-							<td>{{ $payment->created_at }}</td>
-							<td>
-								<a href="javascript:editPayment( {{ $payment->id }} )">Edit</a>
+					@if (!empty($payments))
+						@foreach ($payments as $payment)
+							<tr> 
+								<th scope="row">{{ $payment->id }}</th>
+								<td>{{ $payment->paymentMethod->name }}</td>
+								<td>{{ $payment->value }}</td>
+								<td>{{ $payment->description }}</td>
+								<td>{{ $payment->created_at }}</td>
+								<td>
+									<a href="javascript:editPayment( {{ $payment->id }} )">Edit</a>
 
-								<!-- <a href="#" onclick="event.preventDefault();
-                                                     document.getElementById('delete-form-{{ $payment->id }}').submit();">Del</a>
+									<!-- <a href="#" onclick="event.preventDefault();
+	                                                     document.getElementById('delete-form-{{ $payment->id }}').submit();">Del</a>
 
-                                        <form id="delete-form-{{ $payment->id }}" action="{{ route('sales.destroy', $payment->id) }}" method="POST" style="display: none;">
-                                        	<input name="_method" type="hidden" value="DELETE">
-                                            {{ csrf_field() }}
-                                        </form> -->
-							</td>
-						</tr>
-					@endforeach
+	                                        <form id="delete-form-{{ $payment->id }}" action="{{ route('sales.destroy', $payment->id) }}" method="POST" style="display: none;">
+	                                        	<input name="_method" type="hidden" value="DELETE">
+	                                            {{ csrf_field() }}
+	                                        </form> -->
+								</td>
+							</tr>
+						@endforeach
+					@endif
 					</tbody>
 				</table>
 			</div>
