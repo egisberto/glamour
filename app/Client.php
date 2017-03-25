@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Scopes\CompanyScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
@@ -26,25 +27,16 @@ class Client extends Model
         $this->attributes['birth_date'] = Carbon::createFromFormat('d/m/Y', $value)->toDateString();
     }
 
-    public function setCompanyIdAttribute($value)
-    {
-        $user = Auth::user();
-        $this->attributes['company_id'] = $user->company_id;
-    }
-
-    public function getCompanyIdAttribute($value)
-    {
-        $user = Auth::user();
-        return $user->company_id;
-    }
-
     protected static function boot()
     {
         parent::boot();
 
-        static::addGlobalScope('age', function (Builder $builder) {
+        static::addGlobalScope(new CompanyScope);
+
+        static::creating(function ($model)
+        {
             $user = Auth::user();
-            $builder->where('company_id', '=', $user->company_id);
+            $model->attributes['company_id'] = $user->company_id;
         });
     }
 }

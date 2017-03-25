@@ -11,22 +11,23 @@ class Sale extends Model
     protected $guarded = ['id','company_id'];
     
     /**
-     * Get the client from the sale
+     * Get the client from the Sale
      */
     public function client()
     {
         return $this->belongsTo(Client::class);
     }
 
-    public function setCompanyIdAttribute($value)
+    protected static function boot()
     {
-        $user = Auth::user();
-        $this->attributes['company_id'] = $user->company_id;
-    }
+        parent::boot();
 
-    public function getCompanyIdAttribute($value)
-    {
-        $user = Auth::user();
-        return $user->company_id;
+        static::addGlobalScope(new CompanyScope);
+
+        static::creating(function ($model)
+        {
+            $user = Auth::user();
+            $model->attributes['company_id'] = $user->company_id;
+        });
     }
 }
